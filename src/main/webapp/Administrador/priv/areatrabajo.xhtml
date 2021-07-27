@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition>
+        <div class="panel panel-default">
+            <div class="container-fluid">
+                <div class="row justify-content-md-center " style="padding-top: 1%;">
+                    <div class=" col-md-4">
+
+                    </div>
+                    <div class=" col-md-4" style="text-align: center;">
+                        <c:if test="#{usuarioSession.mensajes.equalsIgnoreCase('regOk')}">
+                            <div class="alert alert-success" role="alert">
+                                Registro de usuario satisfactorio !!!!!!
+                            </div>
+                        </c:if>
+
+                        <c:if test="#{usuarioSession.mensajes.equalsIgnoreCase('regBad')}">
+                            <div class="alert alert-danger" role="alert">
+                                Verifique sus datos !!!!!
+                            </div>
+                        </c:if>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-bottom: 2%;">
+                            crear usuario
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Crear Usuario</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row justify-content-md-center " style="padding-top: 3%;">
+                                                <div class="col-md-3"></div>
+                                                <div class="col-md-6">                                                
+                                                    <h:form id="fmrReg">
+                                                        <div class="form-row">
+                                                            <h:outputLabel for="fmrRol" value="Rol"></h:outputLabel>
+                                                            <h:selectOneMenu value="#{usuarioSession.rolidIn}" id="fmrRol" class="form-control"  >
+                                                                <f:selectItems value="#{usuarioSession.leerroles()}" var="rl" itemLabel="#{rl.rol}" itemValue="#{rl.id}" ></f:selectItems>
+                                                               
+                                                            </h:selectOneMenu>
+                                              
+                                                            
+                                                            <h:message for="fmrRol" style="color: red;"></h:message>
+                                                        </div>
+                                                        <div class="form-row">
+
+                                                            <h:outputLabel for="fmrDo">Cedula</h:outputLabel>
+                                                            <h:inputText 
+                                                                value="#{usuarioSession.usuReg.cedula}"
+                                                                maxlength="11"
+                                                                required="true"
+                                                                requiredMessage="Ingrese un numero de documento"
+                                                                class="form-control"
+                                                                id="fmrDo" />
+                                                            <h:message for="fmrDo" style="color: red;"></h:message>
+                                                        </div>
+
+                                                        <div class="form-row">
+
+                                                            <h:outputLabel for="fmrno">primer nombre</h:outputLabel>
+                                                            <h:inputText 
+                                                                value="#{usuarioSession.usuRegd.primerNombre}"
+                                                                maxlength="20"
+                                                                required="true"
+                                                                requiredMessage="Ingrese su primer nombre"
+                                                                class="form-control"
+                                                                id="fmrno" />
+                                                            <h:message for="fmrno" style="color: red;"></h:message>
+                                                        </div>
+                                                        <div class="form-row">
+
+                                                            <h:outputLabel for="fmrao">primer apellido</h:outputLabel>
+                                                            <h:inputText 
+                                                                value="#{usuarioSession.usuRegd.primerApellido}"
+                                                                maxlength="20"
+                                                                required="true"
+                                                                requiredMessage="Ingrese su primer apellido"
+                                                                class="form-control"
+                                                                id="fmrao" />
+                                                            <h:message for="fmrao" style="color: red;"></h:message>
+                                                            
+                                                        </div>
+                                                        <div class="form-row">
+
+                                                            <h:outputLabel for="fmrco">correo</h:outputLabel>
+                                                            <h:inputText 
+                                                                value="#{usuarioSession.contactoIn.correoElectronico}"
+                                                                maxlength="20"
+                                                                required="true"
+                                                                requiredMessage="Ingrese un correo"
+                                                                class="form-control"
+                                                                id="fmrnco" />
+                                                            <h:message for="fmrco" style="color: red;"></h:message>
+                                                        </div>
+                                                        <div class="form-row">
+
+                                                            <h:outputLabel for="fmrto">telefono</h:outputLabel>
+                                                            <h:inputText 
+                                                                value="#{usuarioSession.contactoIn.telefono}"
+                                                                maxlength="20"
+                                                                required="true"
+                                                                requiredMessage="Ingrese un numero de telefono"
+                                                                class="form-control"
+                                                                id="fmrnto" />
+                                                            <h:message for="fmrto" style="color: red;"></h:message>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <h:outputLabel for="fmrEmail">Usuario</h:outputLabel>
+                                                            <h:inputText 
+                                                                value="#{usuarioSession.usuReg.nomUser}"
+                                                                requiredMessage="Por favor ingrese un nombre de usuario"
+                                                                maxlength="45"
+                                                                required="true"
+                                                                class="form-control" 
+                                                                id="fmrEmail" />
+                                                            <h:message for="fmrEmail" style="color: red;"></h:message>
+
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <h:outputLabel for="fmrPassword">Contraseña</h:outputLabel>
+                                                            <h:inputSecret 
+                                                                value="#{usuarioSession.usuReg.contrasena}"
+                                                                maxlength="8"
+                                                                required="true"
+                                                                requiredMessage="Por favor ingrese una clave"
+                                                                class="form-control" id="fmrPassword"/>
+                                                            <h:message for="fmrPassword" style="color: red;"></h:message>
+                                                        </div>
+                                                        
+
+                                                        <br/>
+                                                        <h:commandButton action="#{usuarioSession.registarUsuario()}" class="btn btn-primary" value="Registrar">
+                                                        
+                                                        </h:commandButton>
+
+                                                    </h:form>
+                                                </div>
+                                                <div class="col-md-3"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <table class="table">
+                            <thead class="thead-dark " style="margin: 50px;">
+                                <tr>
+                                    <th>Cedula</th>
+                                    <th>Primer Nombre</th>
+                                    <th>Segundo nombre</th>
+                                    <th>Primer Apellido</th>
+                                    <th>Segundo Apellido</th>
+                                    <th>Rol</th>
+                                    <th>Usuario</th>
+                                    <th>Contraseña</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="#{usuarioSession.leertodos()}" var="objUsu">
+
+                                    <tr>
+                                        <td>#{objUsu.cedula}</td>
+                                        <td>#{objUsu.datosId.primerNombre}</td>
+                                        <td>#{objUsu.datosId.segundoNombre}</td>
+                                        <td>#{objUsu.datosId.primerApellido}</td>
+                                        <td>#{objUsu.datosId.segundoApellido}</td>
+                                        <td>#{objUsu.rolId.rol}</td>
+                                        <td>#{objUsu.nomUser}</td>
+                                        <td>#{objUsu.contrasena}</td>
+                                        <td>
+                                            <c:if test="#{objUsu.estado}">
+                                                <img src="#{request.contextPath}/images/activo.png" alt=""/>
+                                            </c:if>
+                                            <c:if test="#{!objUsu.estado}">
+                                                <img src="#{request.contextPath}/images/inactivo.png" alt=""/>
+                                            </c:if>
+                                        </td>
+                                        
+                                    </tr>
+                                </c:forEach>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+        </div>       
+    </ui:composition>
+</html>
+

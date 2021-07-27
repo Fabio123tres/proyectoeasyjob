@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:composition>
+        <div class="panel panel-default">
+            <div class="container-fluid">
+                <div class="row justify-content-md-center " style="padding-top: 1%;">
+                    <div class=" col-md-2">
+
+                    </div>
+                    <div class=" col-md-8" style="text-align: center;">
+                        <c:if test="#{usuarioSession.mensajes.equalsIgnoreCase('regOk')}">
+                            <div class="alert alert-success" role="alert">
+                                datos actualizados !!!!!!
+                            </div>
+                        </c:if>
+
+                        <c:if test="#{usuarioSession.mensajes.equalsIgnoreCase('regBad')}">
+                            <div class="alert alert-danger" role="alert">
+                                error de actualizacion !!!!!
+                            </div>
+                        </c:if>
+                        <div class="row justify-content-md-center " style="padding-top: 3%;">
+                            <div class="col-md-12">                                                
+                                <h:form id="fmrReg">
+                                    <div class="titlepage">
+                                        <h2>Mi Perfil</h2>
+                                            
+                                    </div>
+                                    <div class="form-row col-md-6">
+                                        
+                                            <h:outputLabel for="inrol" value="Rol"></h:outputLabel>
+                                            <h:inputText 
+                                                value="#{usuarioSession.usuLog.rolId.rol}"
+                                                maxlength="11"
+                                                disabled="true"
+                                                class="form-control"
+                                                id="fmrRol" />
+                                    </div>
+                                        <div class="form-row col-md-6">
+                                        <h:outputLabel for="fmrDo">Cedula</h:outputLabel>
+                                        <h:inputText 
+                                            value="#{usuarioSession.usuLog.cedula}"
+                                            maxlength="11"
+                                            disabled="true"                                          
+                                            class="form-control"
+                                            id="fmrDo" />
+                                    </div>
+                                    <div class="form-row col-md-6">
+                                        <h:outputLabel for="fmrEmail">Primer Nombre</h:outputLabel>
+                                        <h:inputText 
+                                            value="#{usuarioSession.usuLog.datosId.primerNombre}"
+                                            requiredMessage="Por favor ingrese un correo electronico"
+                                            maxlength="45"
+                                            required="true"
+                                            class="form-control" 
+                                            id="fmrPn" />
+                                        <h:message for="fmrPn" style="color: red;"></h:message>
+                                    </div>
+                                         <div class="form-row col-md-6">
+                                        <h:outputLabel for="fmrEmail">Segundo Nombre</h:outputLabel>
+                                        <h:inputText 
+                                            value="#{usuarioSession.usuLog.datosId.segundoNombre}"
+                                            requiredMessage="Por favor ingrese un correo electronico"
+                                            maxlength="45"
+                                            required="true"
+                                            class="form-control" 
+                                            id="fmrSn" />
+                                        <h:message for="fmrSn" style="color: red;"></h:message>
+
+                                    </div>
+                                    <div class="form-row col-md-6">
+                                        <h:outputLabel for="fmrEmail">Primer Apellido</h:outputLabel>
+                                        <h:inputText 
+                                            value="#{usuarioSession.usuLog.datosId.primerApellido}"
+                                            requiredMessage="Por favor ingrese un correo electronico"
+                                            maxlength="45"
+                                            required="true"
+                                            class="form-control" 
+                                            id="fmrPa" />
+                                        <h:message for="fmrPa" style="color: red;"></h:message>
+                                    </div>
+                                        <div class="form-row col-md-6">
+                                        <h:outputLabel for="fmrEmail">Segundo Apellido</h:outputLabel>
+                                        <h:inputText 
+                                            value="#{usuarioSession.usuLog.datosId.segundoApellido}"
+                                            requiredMessage="Por favor ingrese un correo electronico"
+                                            maxlength="45"
+                                            required="true"
+                                            class="form-control" 
+                                            id="fmrSa" />
+                                        <h:message for="fmrSa" style="color: red;"></h:message>
+
+                                    </div>
+                                    <div class="form-row col-md-6">
+                                        <h:outputLabel for="fmrEmail">Telefono</h:outputLabel>
+                                        <h:inputText 
+                                            value="#{usuarioSession.usuLog.contactoId.telefono}"
+                                            requiredMessage="Por favor ingrese un correo electronico"
+                                            maxlength="45"
+                                            required="true"
+                                            class="form-control" 
+                                            id="fmrT" />
+                                        <h:message for="fmrT" style="color: red;"></h:message>
+                                    </div>
+                                        <div class="form-row col-md-6">
+                                        <h:outputLabel for="fmrEmail">Correo</h:outputLabel>
+                                        <h:inputText 
+                                            value="#{usuarioSession.usuLog.contactoId.correoElectronico}"
+                                            requiredMessage="Por favor ingrese un correo electronico"
+                                            maxlength="45"
+                                            required="true"
+                                            class="form-control" 
+                                            id="fmrCo" />
+                                        <h:message for="fmrCo" style="color: red;"></h:message>
+
+                                    </div>
+                                    <div class="form-row col-md-6">
+                                        <h:outputLabel for="fmrPassword">Contraseña</h:outputLabel>
+                                        <h:inputSecret 
+                                            value="#{usuarioSession.usuLog.contrasena}"
+                                            maxlength="8"
+                                            required="true"
+                                            requiredMessage="Por favor ingrese una clave"
+                                            class="form-control" id="fmrPassword"/>
+                                        <h:message for="fmrPassword" style="color: red;"></h:message>
+                                    </div>
+                                    
+
+                                    <br/>
+                                    <br/>
+                                    <div class="form-row col-md-12">
+                                    <h:commandButton action="#{usuarioSession.actualizarDatos()}" class="btn btn-primary" value="Guardar"></h:commandButton>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-2"></div>
+                </div>
+            </div>
+        </div>       
+    </ui:composition>
+</html>
+

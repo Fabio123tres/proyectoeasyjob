@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition>
+        <div class="panel panel-default">
+            <div class="container-fluid">
+                <div class="row justify-content-md-center " style="padding-top: 1%;">
+                    <div class=" col-md-4">
+
+                    </div>
+                    <div class=" col-md-4" style="text-align: center;">
+                        <c:if test="#{provedorSession.mensajes.equalsIgnoreCase('regOk')}">
+                            <div class="alert alert-success" role="alert">
+                                Registro de proveedor satisfactorio !!!!!!
+                            </div>
+                        </c:if>
+
+                        <c:if test="#{provedorSession.mensajes.equalsIgnoreCase('regBad')}">
+                            <div class="alert alert-danger" role="alert">
+                                Verifique sus datos !!!!!
+                            </div>
+                        </c:if>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-bottom: 2%;">
+                            Crear Proveedor
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Crear Proveedor</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row justify-content-md-center " style="padding-top: 3%;">
+                                                <div class="col-md-3"></div> 
+                                                <div class="col-md-6">                                                
+                                                    <h:form id="fmrReg">
+                                                        <div class="form-row">
+
+                                                            <h:outputLabel for="fmrNi">Nit Proveedor</h:outputLabel>
+                                                            <h:inputText 
+                                                                value="#{provedorSession.proveedorIn.nitProveedor}"
+                                                                maxlength="11"
+                                                                required="true"
+                                                                requiredMessage="Ingrese el nit del proveedor"
+                                                                class="form-control"
+                                                                id="fmrNi" />
+                                                            <h:message for="fmrNi" style="color: red;"></h:message>
+                                                        </div>
+                                                        <div class="form-row">
+
+                                                            <h:outputLabel for="fmrao">Nombre proveedor</h:outputLabel>
+                                                            <h:inputText 
+                                                                value="#{provedorSession.proveedorIn.nombreProveedor}"
+                                                                maxlength="20"
+                                                                required="true"
+                                                                requiredMessage="Ingrese el nombre del proveedor"
+                                                                class="form-control"
+                                                                id="fmrao" />
+                                                            <h:message for="fmrao" style="color: red;"></h:message>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <h:outputLabel for="fmrEmail">Telefono</h:outputLabel>
+                                                            <h:inputText 
+                                                                value="#{provedorSession.proveedorIn.telefono}"
+                                                                requiredMessage="ingrese telefono proveedor"
+                                                                maxlength="45"
+                                                                required="true"
+                                                                class="form-control" 
+                                                                id="fmrEmail" />
+                                                            <h:message for="fmrEmail" style="color: red;"></h:message>
+
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <h:outputLabel for="fmrPassword">Direccion</h:outputLabel>
+                                                            <h:inputText 
+                                                                value="#{provedorSession.proveedorIn.direccion}"
+                                                                maxlength="20"
+                                                                required="true"
+                                                                requiredMessage="Por favor ingrese la direccion"
+                                                                class="form-control" id="fmrPassword"/>
+                                                            <h:message for="fmrPassword" style="color: red;"></h:message>
+                                                        </div>
+
+                                                        <br/>
+                                                        <h:commandButton action="#{provedorSession.crearProveedor()}" class="btn btn-primary" value="Registrar"></h:commandButton>
+
+                                                    </h:form>
+                                                </div>
+                                                 <div class="col-md-3"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <h:form>
+                            <table class="table">
+                                <thead class="thead-dark " style="margin: 50px;">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nit Proveedor</th>
+                                        <th>Nombre Proveedor</th>
+                                        <th>Telefono</th>
+                                        <th>Direccion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="#{provedorSession.leerProveedor()}" var="objpro" varStatus="proveedorIn">
+
+                                        <tr>
+                                            <th scope="row">#{objpro.id}</th>
+                                            <td>#{objpro.nitProveedor}</td>
+                                            <td>#{objpro.nombreProveedor}</td>                                      
+                                            <td>#{objpro.telefono}</td>
+                                            <td>#{objpro.direccion}</td>
+                                            <td>
+                                                <h:commandButton class="btn-block" action="#{provedorSession.eliminarProveedor(objpro)}" value="X"></h:commandButton>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+
+                                </tbody>
+
+                            </table>
+                        </h:form>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+        </div>       
+    </ui:composition>
+</html>
+
